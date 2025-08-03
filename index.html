@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIC-TAC-TOE</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            background-image: url(https://play-lh.googleusercontent.com/EUgRlCOH_jwtW39SaG7XeKq8pJsQfKkZB4MYED18npdsKeRZDmN9xVsSV3nbpoJGgIU=w526-h296-rw);
+        }
+        body p{
+            color: transparent;
+            background-image: linear-gradient(blue,red,yellow);
+            background-clip: text;
+            font-size: 100px;
+            position: absolute;
+            top: -110px;
+            z-index: 10;
+        }
+        .container{
+            height:500px;
+            width:500px;
+            background-image: url(https://png.pngtree.com/background/20250108/original/pngtree-rustic-wooden-texture-perfect-backdrop-for-a-rustic-theme-picture-image_15235087.jpg);
+            display: grid;
+            grid-template-rows:repeat(3,1fr);
+            grid-template-columns:repeat(3,1fr);
+            position: absolute;
+            top: 80px;
+        }
+        .btn{
+            border: 2px solid black;
+            border-radius: 15%;
+            color: white;
+            font-size: 100px;
+            background-image: url(https://png.pngtree.com/background/20250108/original/pngtree-rustic-wooden-texture-perfect-backdrop-for-a-rustic-theme-picture-image_15235087.jpg);
+        }
+    </style>
+</head>
+<body>
+    <p>TIC-TAC-TOE</p>
+    <div class="container">
+      <button class="btn"></button>
+      <button class="btn"></button>
+      <button class="btn"></button>
+      <button class="btn"></button>
+      <button class="btn"></button>
+      <button class="btn"></button>
+      <button class="btn"></button>
+      <button class="btn"></button>
+      <button class="btn"></button>
+    </div>
+    <script>
+        let bt=document.getElementsByTagName("button");
+let count=0;
+let k=0;
+let comp=0;
+const audio=new Audio();
+audio.src="ss.mp3";
+for(let i=0;i<(bt.length);i++){
+    bt[i].addEventListener("click",async()=>{
+        audio.play();
+        bt[i].innerHTML="O";
+        bt[i].disabled=true;
+        count+=1;
+        setTimeout(()=>{
+       var v=Math.round(0+8*(Math.random()));
+          if(count<9)
+          {
+            while((bt[v].innerHTML)==="O" || (bt[v].innerHTML)==="X")
+          {      
+          v=Math.round(0+8*(Math.random()));      
+          }
+          const c=v;
+       bt[c].innerHTML="X";
+       count+=1;
+       bt[c].disabled=true;
+          }
+        },200)
+        
+    })
+}
+
+ let arr=[[0,1,2],[2,5,8],[6,7,8],[0,3,6],[0,4,8],[2,4,6],[1,4,7],[3,4,5]];
+function win(){
+  for(let i=0;i<8;i++)
+  {
+    for(let j=0;j<3;j++)
+    {
+     if((bt[arr[i][j]].disabled && bt[arr[i][j]].innerHTML==="O"))
+        {
+            k+=1;
+        }
+        if((bt[arr[i][j]].disabled && bt[arr[i][j]].innerHTML==="X"))
+            {
+                comp+=1;
+            }       
+    }
+    if(k===3)
+    {
+        alert("YOU WON");
+        audio.src="game.mp3";
+        audio.play();
+    }
+    else if(comp===3)
+    {
+        alert("COMPUTER WON");
+        audio.src="game.mp3";
+        audio.play();
+    }
+    else
+    {
+        k=0;
+        comp=0;
+    }
+  }
+}
+setInterval(() => {
+    win();
+}, 20);
+    </script>
+</body>
+</html>
